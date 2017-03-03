@@ -43,9 +43,9 @@
       </ion-header-bar>
       <ion-content ng-controller="infoCtrl">
         <div class="table1">
-          <form>
+          <form name="form">
             <label class="item item-input">
-              <input type="text" placeholder="Enter a comment" ng-model="comment">
+              <input type="text" name="theComment" placeholder="Enter a comment" ng-model="comment">
             </label>
 
             <button class="button button-block button-positive" ng-click="addInfo()">Add Comment</button>

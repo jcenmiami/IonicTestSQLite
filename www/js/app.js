@@ -39,6 +39,8 @@ app.controller('infoCtrl', function($scope, $cordovaSQLite, $interval){
     var query="INSERT INTO forumDB(comment) VALUES (?)";
     $cordovaSQLite.execute(db,query,[$scope.comment]);
     $scope.load();
+    //$scope.form.$setPristine();
+    $scope.comment = '';
   }
   $scope.load=function(){
     $scope.alldata=[];
