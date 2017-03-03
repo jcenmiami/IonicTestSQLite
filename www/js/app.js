@@ -25,31 +25,24 @@ app.run(function($ionicPlatform, $cordovaSQLite) {
       StatusBar.styleDefault();
     }
     db=window.openDatabase("sqlite", "1.0", "sqlitedemo",2000);
-    $cordovaSQLite.execute(db, "CREATE TABLE forumDB(id integer primary key, firstname text)");
-
-
-
-
-
-
-
-
-
-
+    $cordovaSQLite.execute(db, "CREATE TABLE forumDB(id integer primary key, comment text)");
 
 
 
   });
 })
-app.controller('infoCtrl', function($scope, $cordovaSQLite){
+app.controller('infoCtrl', function($scope, $cordovaSQLite, $interval){
+
+
+
   $scope.addInfo=function(){
-    var query="INSERT INTO forumDB(firstname) VALUES (?)";
-    $cordovaSQLite.execute(db,query,[$scope.firstname]);
+    var query="INSERT INTO forumDB(comment) VALUES (?)";
+    $cordovaSQLite.execute(db,query,[$scope.comment]);
     $scope.load();
   }
   $scope.load=function(){
     $scope.alldata=[];
-    $cordovaSQLite.execute(db,"SELECT id, firstname FROM forumDB ORDER BY id DESC").then(function(result){
+    $cordovaSQLite.execute(db,"SELECT id, comment FROM forumDB ORDER BY id DESC").then(function(result){
       if(result.rows.length){
         for (var i=0; i < result.rows.length; i++){
           $scope.alldata.push(result.rows.item(i));
@@ -60,5 +53,15 @@ app.controller('infoCtrl', function($scope, $cordovaSQLite){
     }, function(error){
       console.log("error" + err);
     });
-    }
+  }
+
+  // Run once. Load the data from the database.
+  $interval(callAtStart, 500, 1);
+
+  function callAtStart() {
+    $scope.load();
+  }
+
+
+
 })

@@ -5,6 +5,8 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+
     <link rel="manifest" href="manifest.json">
 
     <!-- un-comment this code to enable service worker
@@ -39,28 +41,28 @@
       <ion-header-bar class="bar-stable">
         <h1 class="title">Social Media</h1>
       </ion-header-bar>
-      <ion-content ng-controller="infoCtrl">
+      <ion-content ng-controller="infoCtrl" data-ng-init="load()">
         <div class="table1">
           <form>
             <label class="item item-input">
-              <input type="text" placeholder="Enter a comment" ng-model="firstname">
+              <input type="text" placeholder="Enter a comment" ng-model="comment">
             </label>
 
             <button class="button button-block button-positive" ng-click="addInfo()">Add Comment</button>
+            <button class="button button-block button-positive" ng-click="load()">Refresh Comments</button>
           </form>
         </div>
 
         <div class="table2">
-          <div class="row">
-            <div class="col col-10">ID</div>
-            <div class="col col-100">Comment</div>
+          <div class="row" style="border-bottom: 0.5px solid #4588ba;">
+            <div class="col col-10"><strong>ID</strong></div>
+            <div class="col col-100"><strong>Comment</strong></div>
           </div>
 
-          <div class="row" ng-repeat="item in alldata">
+          <div class="row" ng-repeat="item in alldata" style="border-bottom: 0.5px solid #4588ba;">
             <div class="col col-10">{{item.id}}</div>
-            <div class="col col-100">{{item.firstname}}</div>
+            <div class="col col-100">{{item.comment}}</div>
           </div>
-
 
         </div>
 
